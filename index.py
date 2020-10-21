@@ -68,6 +68,7 @@ class Example(QWidget):
           i = i+1
           ti = 0
           toto = 0
+          day = 0
           merge_format = workbook.add_format({
             'bold': True,
             'border': 4,
@@ -75,22 +76,41 @@ class Example(QWidget):
             'valign': 'vcenter',
             'fg_color': '#e1f6fa',
           })
-          time_massive = ['10-11:' ,'11-12:' ,'12-12:30: – обед' ,'12:30-13:30:' ,'13:30-14:30:' ,'14:30-15:30:' ,'15:30-16:00: перерыв','16-17:' ,'17-18:', 'Протоколы:', 'Изучение библиотеки:', 'Разработка программы:']
+          time_massive = ['10-11:' ,'11-12:' ,'12-12:30:' ,'12:30-13:30:' ,'13:30-14:30:' ,'14:30-15:30:' ,'15:30-16:00:','16-17:' ,'17-18:', 'Протоколы:', 'Изучение библиотеки:', 'Разработка программы:']
+
           while  i+1 <= len(self.rir):
+
+
             worksheet.write('A' + str(i + i2 + 1), str(self.rir[i]) + "." + self.mth + "." + self.yr,bold)
             worksheet.write('B' + str(i + i2 + 1),'', cell_format)
+
+
             ti = 0
             while ti + 1 <= len(time_massive):
+
                  worksheet.write('A' + str(i + i2 + 1 + ti + 1), time_massive[ti])
                  worksheet.write('A' + str(ti+2), time_massive[ti])
                  worksheet.write('B' + str(i + i2 + 1 + ti + 1), '',merge_format)
                  worksheet.write('B' + str(ti+2), '',merge_format)
+                 worksheet.write('B' + str(i + i2 - 10), "Обед", merge_format)
+                 worksheet.write('B' + str(i + i2 - 6), "Перерыв", merge_format)
                  ti = ti + 1
                  toto = toto + 1
+
             toto = toto + 1
             i = i +1
             i2 = i2 + 13
           i = 0
+          print("1 " + str(i + i2 + 1 + ti + 1))
+          print("2 " + str(toto))
+          print("3 " + str(i2))
+          worksheet.write("B"+ str(4),'Обед',merge_format)
+          worksheet.write("B"+ str(8),'Перерыв',merge_format)
+          worksheet.write("B"+ str(4),'Обед',merge_format)
+          worksheet.write("B"+ str(8),'Перерыв',merge_format)
+          worksheet.write("B"+ str(i + i2 + 1 + ti - 1),'Обед',merge_format)
+          worksheet.write("B"+ str(i + i2 + 1 + ti + 3),'Перерыв',merge_format)
+          #worksheet.write('B' + str(i + i2 - 6), "Перерыв", merge_format)
           workbook.close()
           Qmessa("Готово")
         except:
